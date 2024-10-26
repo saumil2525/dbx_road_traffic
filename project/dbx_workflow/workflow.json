@@ -1,0 +1,118 @@
+{
+  "job_id": 285776782554168,
+  "creator_user_name": "{REPLACE_USER_NAME}",
+  "run_as_user_name": "{REPLACE_USER_NAME}",
+  "run_as_owner": true,
+  "settings": {
+    "name": "ETL-Workflow",
+    "email_notifications": {
+      "on_success": ["REPLACE_USER_NAME"],
+      "on_failure": ["REPLACE_USER_NAME"],
+      "no_alert_for_skipped_runs": false
+    },
+    "webhook_notifications": {},
+    "notification_settings": {
+      "no_alert_for_skipped_runs": false,
+      "no_alert_for_canceled_runs": false
+    },
+    "timeout_seconds": 0,
+    "trigger": {
+      "pause_status": "UNPAUSED",
+      "file_arrival": {
+        "url": "abfss://landing@databrixdevstorage.dfs.core.windows.net/raw_traffic/"
+      }
+    },
+    "max_concurrent_runs": 1,
+    "tasks": [
+      {
+        "task_key": "Load_to_bronze",
+        "run_if": "ALL_SUCCESS",
+        "notebook_task": {
+          "notebook_path": "/Workspace/project/02. Load to bronze",
+          "base_parameters": {
+            "env": "dev"
+          },
+          "source": "WORKSPACE"
+        },
+        "existing_cluster_id": "1017-124646-dwfd3d6l",
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "webhook_notifications": {}
+      },
+      {
+        "task_key": "Load_to_silver_traffic",
+        "depends_on": [
+          {
+            "task_key": "Load_to_bronze"
+          }
+        ],
+        "run_if": "ALL_SUCCESS",
+        "notebook_task": {
+          "notebook_path": "/Workspace/project/03. Silver Transformations Traffic",
+          "base_parameters": {
+            "env": "dev"
+          },
+          "source": "WORKSPACE"
+        },
+        "existing_cluster_id": "1017-124646-dwfd3d6l",
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "webhook_notifications": {}
+      },
+      {
+        "task_key": "Load_to_silver_roads",
+        "depends_on": [
+          {
+            "task_key": "Load_to_silver_traffic"
+          }
+        ],
+        "run_if": "ALL_SUCCESS",
+        "notebook_task": {
+          "notebook_path": "/Workspace/project/05. Silver Transformations Roads",
+          "base_parameters": {
+            "env": "dev"
+          },
+          "source": "WORKSPACE"
+        },
+        "existing_cluster_id": "1017-124646-dwfd3d6l",
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "webhook_notifications": {}
+      },
+      {
+        "task_key": "Load_to_gold",
+        "depends_on": [
+          {
+            "task_key": "Load_to_silver_roads"
+          }
+        ],
+        "run_if": "ALL_SUCCESS",
+        "notebook_task": {
+          "notebook_path": "/Workspace/project/06. Gold Final Transformation",
+          "base_parameters": {
+            "env": "dev"
+          },
+          "source": "WORKSPACE"
+        },
+        "existing_cluster_id": "1017-124646-dwfd3d6l",
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "webhook_notifications": {}
+      }
+    ],
+    "format": "MULTI_TASK",
+    "queue": {
+      "enabled": true
+    },
+    "environments": [
+      {
+        "environment_key": "dbt-default",
+        "spec": {
+          "client": "1",
+          "dependencies": ["dbt-databricks>=1.0.0,<2.0.0"]
+        }
+      }
+    ]
+  },
+  "created_time": 1729911442899
+}

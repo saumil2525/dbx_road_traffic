@@ -1,0 +1,89 @@
+{
+  "cluster_id": "1017-124646-dwfd3d6l",
+  "creator_user_name": "{REPLACE_CLUSTER_NAME}",
+  "spark_context_id": 6162947235066412000,
+  "driver_healthy": true,
+  "cluster_name": "Cluster",
+  "spark_version": "15.4.x-scala2.12",
+  "spark_conf": {
+    "spark.master": "local[*, 4]",
+    "spark.databricks.cluster.profile": "singleNode"
+  },
+  "azure_attributes": {
+    "first_on_demand": 1,
+    "availability": "ON_DEMAND_AZURE",
+    "spot_bid_max_price": -1
+  },
+  "node_type_id": "Standard_DS3_v2",
+  "driver_node_type_id": "Standard_DS3_v2",
+  "custom_tags": {
+    "ResourceClass": "SingleNode"
+  },
+  "spark_env_vars": {
+    "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+  },
+  "autotermination_minutes": 15,
+  "enable_elastic_disk": true,
+  "disk_spec": {},
+  "cluster_source": "UI",
+  "single_user_name": "{REPLACE_USERNAME}",
+  "enable_local_disk_encryption": false,
+  "instance_source": {
+    "node_type_id": "Standard_DS3_v2"
+  },
+  "driver_instance_source": {
+    "node_type_id": "Standard_DS3_v2"
+  },
+  "data_security_mode": "SINGLE_USER",
+  "runtime_engine": "STANDARD",
+  "effective_spark_version": "15.4.x-scala2.12",
+  "state": "TERMINATED",
+  "state_message": "Inactive cluster terminated (inactive for 15 minutes).",
+  "start_time": 1729169207004,
+  "terminated_time": 1729913933429,
+  "last_state_loss_time": 1729912107702,
+  "last_activity_time": 1729912129841,
+  "last_restarted_time": 1729912107731,
+  "num_workers": 0,
+  "default_tags": {
+    "Vendor": "Databricks",
+    "Creator": "{REPLACE_THIS}",
+    "ClusterName": "{REPLACE_CLUSTER_NAME}",
+    "ClusterId": "1017-124646-dwfd3d6l"
+  },
+  "termination_reason": {
+    "code": "INACTIVITY",
+    "type": "SUCCESS",
+    "parameters": {
+      "inactivity_duration_min": "15"
+    }
+  },
+  "init_scripts_safe_mode": false,
+  "spec": {
+    "cluster_name": "{REPLACE_CLUSTER_NAME}",
+    "spark_version": "15.4.x-scala2.12",
+    "spark_conf": {
+      "spark.master": "local[*, 4]",
+      "spark.databricks.cluster.profile": "singleNode"
+    },
+    "azure_attributes": {
+      "first_on_demand": 1,
+      "availability": "ON_DEMAND_AZURE",
+      "spot_bid_max_price": -1
+    },
+    "node_type_id": "Standard_DS3_v2",
+    "driver_node_type_id": "Standard_DS3_v2",
+    "custom_tags": {
+      "ResourceClass": "SingleNode"
+    },
+    "spark_env_vars": {
+      "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+    },
+    "autotermination_minutes": 15,
+    "enable_elastic_disk": true,
+    "single_user_name": "sam.desai@outlook.com.au",
+    "data_security_mode": "SINGLE_USER",
+    "runtime_engine": "STANDARD",
+    "num_workers": 0
+  }
+}
